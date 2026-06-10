@@ -21,6 +21,7 @@ Copilot capability during a live session.
 | 7 | `07-explain-and-debug` | Core Developer Workflows | **Code explanation & optimization** | 5 min |
 | 8 | `08-plan-mode` | Suggestions vs. Chat (Modes) | **Plan mode** — research & outline | 8 min |
 | 9 | `09-copilot-instructions` | Customizing Copilot | **Copilot Instructions** — project-wide coding standards | 8 min |
+| 10 | `10-copilot-agent` | Customizing Copilot | **Custom Copilot Agent** — reusable chat participant | 8 min |
 
 ---
 
@@ -241,6 +242,42 @@ that Copilot automatically applies to every suggestion — without repeating rul
 - `.vscode/instructions/` = workspace scope; `.github/copilot-instructions.md` = repo-wide
 - Great for onboarding: new developers get team standards for free
 - Instructions work in both inline completions and Chat
+
+---
+
+## Demo 10 — Custom Copilot Agent (`10-copilot-agent/paymentService.js`)
+
+**What it shows:** How `.agent.md` files let you define a custom Copilot chat participant
+with its own name, system prompt, and toolset — selectable from the Chat mode picker.
+
+**Files:**
+- `paymentService.js` — a payment service with intentional security and quality issues to review
+- `code-reviewer.agent.md` — the custom agent definition to install in the workspace
+
+**Setup (do this before the demo):**
+1. Copy `code-reviewer.agent.md` to `.vscode/code-reviewer.agent.md`
+2. Reload VS Code (Ctrl+Shift+P → *"Developer: Reload Window"*)
+3. Open Copilot Chat → click the mode picker → verify **Code Reviewer** appears
+
+**How to demo:**
+1. Open `paymentService.js` — briefly walk through the file, pointing out it "looks like real code"
+2. Switch Chat to the **Code Reviewer** agent
+3. Type: *"Review this file"*
+   → Copilot produces a structured report: Critical Issues, Warnings, Suggestions, Summary
+4. Ask: *"What are the security risks in this file?"*
+   → Agent focuses on SQL injection, MD5, hard-coded secrets, swallowed errors
+5. Ask: *"Rewrite `fetchUserOrders` to fix the issues you found"*
+   → Agent generates a corrected version with parameterised queries and error handling
+6. Switch back to the default agent and ask the same question — compare the output style
+7. Bonus: add a rule to `code-reviewer.agent.md` (e.g., *"flag functions over 20 lines"*),
+   reload, and re-run the review
+
+**Key talking points:**
+- Custom agents appear in the mode picker like first-class Copilot modes
+- The system prompt shapes every response — the agent is always "in role"
+- Different agents for different workflows: reviewer, architect, test-writer, documenter…
+- Agents can access the codebase, open problems, and recent changes via their `tools` list
+- Stored in `.vscode/` — version-controlled and shared with the whole team
 
 ---
 

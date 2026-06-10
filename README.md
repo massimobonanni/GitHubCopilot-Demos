@@ -41,3 +41,4 @@ Each sub-folder contains the following demos:
 | 7 | `07-explain-and-debug` | Code explanation & optimization |
 | 8 | `08-plan-mode` | Plan mode — research & outline |
 | 9 | `09-copilot-instructions` | Copilot Instructions — project-wide coding standards |
+| 10 | `10-copilot-agent` | Custom Copilot Agent — reusable chat participant |
