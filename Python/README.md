@@ -22,6 +22,7 @@ Copilot capability during a live session.
 | 8 | `08-plan-mode` | Suggestions vs. Chat (Modes) | **Plan mode** — research & outline | 8 min |
 | 9 | `09-copilot-instructions` | Customizing Copilot | **Copilot Instructions** — project-wide coding standards | 8 min |
 | 10 | `10-copilot-agent` | Customizing Copilot | **Custom Copilot Agent** — reusable chat participant | 8 min |
+| 11 | `11-copilot-prompt` | Customizing Copilot | **Copilot Prompt File** — on-demand invocable prompt | 8 min |
 
 ---
 
@@ -281,6 +282,48 @@ with its own name, system prompt, and toolset — selectable from the Chat mode 
 - Different agents for different workflows: reviewer, architect, test-writer, documenter…
 - Agents can access the codebase, open problems, and recent changes via their `tools` list
 - Stored in `.vscode/` — version-controlled and shared with the whole team
+
+---
+
+## Demo 11 — Copilot Prompt File (`11-copilot-prompt/product_catalog.py`)
+
+**What it shows:** How `.prompt.md` files create on-demand, invocable prompt files
+distinct from always-on Instructions and persistent Agent modes.
+
+**Files:**
+- `product_catalog.py` — a versioned product catalog module (the demo target)
+- `generate-changelog.prompt.md` — the prompt file definition to install in the workspace
+
+**How Prompt Files differ from Agents and Instructions:**
+
+| Feature | When active | File location |
+|---|---|---|
+| Instructions | Always — every suggestion | `.vscode/instructions/*.instructions.md` |
+| Agent | While selected in mode picker | `.vscode/*.agent.md` |
+| **Prompt File** | **When explicitly invoked** | `.vscode/prompts/*.prompt.md` |
+
+**Setup (do this before the demo):**
+1. Copy `generate-changelog.prompt.md` to `.vscode/prompts/generate-changelog.prompt.md`
+2. Reload VS Code (Ctrl+Shift+P → *"Developer: Reload Window"*)
+3. Open Copilot Chat → type `/` → verify **generate-changelog** appears in the list
+
+**How to demo:**
+1. Open `product_catalog.py` — point out the inline `# v2.1.0` version comments
+2. Open Copilot Chat → type `/generate-changelog` and invoke it
+   → Copilot produces a structured Keep-a-Changelog entry with Added/Changed/Fixed sections
+3. Ask the same question **without** the prompt file: *"What changed in this module?"*
+   → Compare the consistency and format of the two responses
+4. Modify `restock()` to accept a `note: str` parameter, then invoke `/generate-changelog` again
+   → The prompt file picks up the change and updates the entry
+5. Bonus: open `generate-changelog.prompt.md`, add an `Impact` field to the output format,
+   reload, run the prompt again, and compare
+
+**Key talking points:**
+- Prompt files are **invoked on demand** — you decide when to use them
+- `/` is the invocation mechanism — prompt files appear alongside built-in Copilot slash commands
+- `mode: ask` keeps the output in Chat; `mode: edit` would apply changes directly to files
+- Prompt files are version-controlled in `.vscode/prompts/` and shared with the team
+- Build a library of prompt files: `generate-changelog`, `write-adr`, `document-api`, `write-pr-description`…
 
 ---
 

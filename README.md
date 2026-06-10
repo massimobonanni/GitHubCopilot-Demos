@@ -42,3 +42,4 @@ Each sub-folder contains the following demos:
 | 8 | `08-plan-mode` | Plan mode — research & outline |
 | 9 | `09-copilot-instructions` | Copilot Instructions — project-wide coding standards |
 | 10 | `10-copilot-agent` | Custom Copilot Agent — reusable chat participant |
+| 11 | `11-copilot-prompt` | Copilot Prompt File — on-demand invocable prompt |
