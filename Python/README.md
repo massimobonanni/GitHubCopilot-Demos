@@ -19,6 +19,7 @@ Copilot capability during a live session.
 | 5 | `05-prompt-engineering` | Prompt Engineering: The 4 S's | **Prompt quality comparison** | 8 min |
 | 6 | `06-bug-detection` | Responsible AI & Validation | **Security review & bug finding** | 8 min |
 | 7 | `07-explain-and-debug` | Core Developer Workflows | **Code explanation & optimization** | 5 min |
+| 8 | `08-plan-mode` | Suggestions vs. Chat (Modes) | **Plan mode** — research & outline | 8 min |
 
 ---
 
@@ -179,6 +180,34 @@ O(n²) duplicate-detection bug. The code works but is hard to read and slow at s
 - Copilot is invaluable when onboarding to a new codebase (~25% speed increase)
 - Regex explanation alone saves significant debugging time
 - Performance optimization: Copilot spots algorithmic issues humans easily miss
+
+---
+
+## Demo 8 — Plan Mode (`08-plan-mode/task_manager.py`)
+
+**What it shows:** Plan mode researches your codebase and outlines a multi-step
+implementation plan BEFORE making any changes.
+
+**Scenario:** A working CLI task manager — add, complete, delete, search tasks. It
+runs entirely in memory with no persistence, no validation, no API layer. It's
+deliberately "ready for the next step" so Plan mode has something meaningful to plan.
+
+**How to demo:**
+1. Open `task_manager.py` — quickly show the working CLI (run it, add a task, quit)
+2. Open Copilot Chat → switch to **Plan** mode (mode picker at the top)
+3. Type: *"Add SQLite persistence so tasks survive a restart. Keep the CLI."*
+4. Copilot outlines a step-by-step plan (create DB, migrate class, update CLI…)
+   **without changing any files**
+5. Refine: *"Also add input validation — titles 3-100 chars, priority must be low/medium/high"*
+6. The plan updates incrementally
+7. Switch to **Agent** mode → *"Implement the plan"* → Copilot executes everything
+
+**Key talking points:**
+- Plan mode = think first, code later
+- You control the architecture before any code is written
+- The plan is iterative — refine it before committing
+- Perfect for complex features, onboarding, and multi-file changes
+- Maps to the slide: "Plan (Research and outline multi-step plans)"
 
 ---
 
