@@ -20,6 +20,7 @@ Copilot capability during a live session.
 | 6 | `06-bug-detection` | Responsible AI & Validation | **Security review & bug finding** | 8 min |
 | 7 | `07-explain-and-debug` | Core Developer Workflows | **Code explanation & optimization** | 5 min |
 | 8 | `08-plan-mode` | Suggestions vs. Chat (Modes) | **Plan mode** — research & outline | 8 min |
+| 9 | `09-copilot-instructions` | Customizing Copilot | **Copilot Instructions** — project-wide coding standards | 8 min |
 
 ---
 
@@ -208,6 +209,41 @@ deliberately "ready for the next step" so Plan mode has something meaningful to 
 - The plan is iterative — refine it before committing
 - Perfect for complex features, onboarding, and multi-file changes
 - Maps to the slide: "Plan (Research and outline multi-step plans)"
+
+---
+
+## Demo 9 — Copilot Instructions (`09-copilot-instructions/order_processor.py`)
+
+**What it shows:** How `*.instructions.md` files let you define project-wide coding standards
+that Copilot automatically applies to every suggestion — without repeating rules in each prompt.
+
+**Files:**
+- `order_processor.py` — skeleton order processor with TODO methods to complete
+- `coding-standards.instructions.md` — the instructions file to install in the workspace
+
+**Setup (do this before the demo):**
+1. Copy `coding-standards.instructions.md` to `.vscode/instructions/coding-standards.instructions.md`
+2. Reload VS Code (Ctrl+Shift+P → *"Developer: Reload Window"*)
+3. Verify the file appears in **Copilot Chat → Manage Instructions**
+
+**How to demo:**
+1. Open `order_processor.py` — show the TODO methods and the instructions file side by side
+2. **Without** the instructions file active: delete it, reload, complete `validate_order` — note the output style
+3. Restore the instructions file, reload, complete the same method again — compare:
+   - Type hints added automatically
+   - Docstring generated following the standards
+   - Specific exception types used
+   - `logger.exception()` used for error logging
+4. Open Chat → ask: *"Does this class follow our coding standards?"*
+5. Ask Chat: *"Review OrderProcessor and flag any violations of our standards"*
+6. Bonus: add a new rule to `coding-standards.instructions.md`, then ask Copilot to update the existing code to comply
+
+**Key talking points:**
+- Instructions files are picked up automatically — zero prompt overhead
+- `applyTo` frontmatter scopes rules to specific file patterns
+- `.vscode/instructions/` = workspace scope; `.github/copilot-instructions.md` = repo-wide
+- Great for onboarding: new developers get team standards for free
+- Instructions work in both inline completions and Chat
 
 ---
 

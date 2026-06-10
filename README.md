@@ -39,3 +39,5 @@ Each sub-folder contains the following demos:
 | 5 | `05-prompt-engineering` | Prompt quality comparison |
 | 6 | `06-bug-detection` | Security review & bug finding |
 | 7 | `07-explain-and-debug` | Code explanation & optimization |
+| 8 | `08-plan-mode` | Plan mode — research & outline |
+| 9 | `09-copilot-instructions` | Copilot Instructions — project-wide coding standards |
