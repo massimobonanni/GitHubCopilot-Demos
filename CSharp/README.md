@@ -23,6 +23,7 @@ Copilot capability during a live session.
 | 9 | `09-copilot-instructions` | Customizing Copilot | **Copilot Instructions** — project-wide coding standards | 8 min |
 | 10 | `10-copilot-agent` | Customizing Copilot | **Custom Copilot Agent** — reusable chat participant | 8 min |
 | 11 | `11-copilot-prompt` | Customizing Copilot | **Copilot Prompt File** — on-demand invocable prompt | 8 min |
+| 12 | `12-copilot-skill` | Customizing Copilot | **Copilot Skill** — packaged, discoverable, reusable capability | 8 min |
 
 ---
 
@@ -322,6 +323,66 @@ distinct from always-on Instructions and persistent Agent modes.
 - `mode: ask` keeps the output in Chat; `mode: edit` would apply changes directly to files
 - Prompt files are version-controlled in `.vscode/prompts/` and shared with the team
 - Build a library of prompt files: `generate-changelog`, `write-adr`, `document-api`, `write-pr-description`…
+
+---
+
+## Demo 12 — Copilot Skill (`12-copilot-skill/CustomerService.cs`)
+
+**What it shows:** How `SKILL.md` files create packaged, discoverable, reusable capabilities
+that agents discover automatically and users can invoke via slash commands — with bundled
+reference assets that guide consistent, high-quality output.
+
+**Files:**
+- `CustomerService.cs` — an undocumented C# service class (the demo target)
+- `SKILL.md` — the skill definition to install in the repository
+- `references/doc-standards.md` — bundled documentation standards the skill references
+
+**How Skills differ from Agents, Instructions, and Prompt Files:**
+
+| Feature | When active | File location | Invocation |
+|---|---|---|---|
+| Instructions | Always — every suggestion | `.vscode/instructions/*.instructions.md` | Automatic |
+| Agent | While selected in mode picker | `.vscode/*.agent.md` | Manual (mode picker) |
+| Prompt File | When explicitly invoked | `.vscode/prompts/*.prompt.md` | Manual (`/command`) |
+| **Skill** | **When relevant to the task** | `.github/skills/<name>/SKILL.md` | **Automatic or `/command`** |
+
+**Key advantages over Prompt Files:**
+- Agents can discover and invoke skills **automatically** from the `description` field — no `/` needed
+- Skills bundle additional assets (reference docs, templates, scripts) alongside instructions
+- Skills follow the open [Agent Skills specification](https://agentskills.io/) — portable across AI tools
+- Community skills can be installed with `gh skill install github/awesome-copilot <skill-name>`
+
+**Setup (do this before the demo):**
+1. Create the skill directory: `mkdir -p .github/skills/document-api/references`
+2. Copy `SKILL.md` to `.github/skills/document-api/SKILL.md`
+3. Copy `references/doc-standards.md` to `.github/skills/document-api/references/doc-standards.md`
+4. Reload VS Code (Ctrl+Shift+P → *"Developer: Reload Window"*)
+5. Open Copilot Chat → type `/` → verify **document-api** appears in the list
+
+**How to demo:**
+1. Open `CustomerService.cs` — walk through the file; note zero XML documentation on all public members
+2. Open Copilot Chat → type `/document-api`
+   → Copilot generates complete XML documentation following the bundled standards in `references/doc-standards.md`
+3. Open `references/doc-standards.md` — explain this file is bundled inside the skill folder
+   and loaded automatically alongside `SKILL.md` to give Copilot richer, project-specific context
+4. **Compare with a plain prompt:** Undo the documentation, then ask Chat:
+   *"Add XML documentation to this file"*
+   → Note: output is inconsistent — missing `<exception>` tags, vague `<returns>` text, no third-person rule
+5. Open `SKILL.md` — point out the YAML frontmatter: `name` and `description` fields
+6. Demonstrate **automatic agent discovery**: switch to **Agent** mode, type
+   *"Can you document the CustomerService for me?"*
+   → The agent picks the skill automatically from the `description` — no `/` needed
+7. Bonus: add a new rule to `SKILL.md` (e.g., *"Always add `<example>` blocks to public methods"*),
+   reload, re-run `/document-api` and compare the output
+
+**Key talking points:**
+- Skills are **folders** (not single files) — they package all the context the AI needs
+- Agents discover skills **automatically** based on the `description` — the `/` slash command is optional
+- Bundled reference files prevent hallucination: the AI reads *your* standards, not its defaults
+- Skills follow the open [Agent Skills specification](https://agentskills.io/) — portable across AI tools (Copilot, Claude, etc.)
+- Store skills in `.github/skills/` to share with the team, or `~/.copilot/skills/` for personal use
+- Install community skills: `gh skill install github/awesome-copilot <skill-name>`
+- Skills vs. Prompt Files: prompts need explicit `/` invocation; skills are discovered by agents automatically
 
 ---
 

@@ -43,3 +43,4 @@ Each sub-folder contains the following demos:
 | 9 | `09-copilot-instructions` | Copilot Instructions — project-wide coding standards |
 | 10 | `10-copilot-agent` | Custom Copilot Agent — reusable chat participant |
 | 11 | `11-copilot-prompt` | Copilot Prompt File — on-demand invocable prompt |
+| 12 | `12-copilot-skill` | Copilot Skill — packaged, discoverable, reusable capability |
