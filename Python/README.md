@@ -24,6 +24,7 @@ Copilot capability during a live session.
 | 10 | `10-copilot-agent` | Customizing Copilot | **Custom Copilot Agent** — reusable chat participant | 8 min |
 | 11 | `11-copilot-prompt` | Customizing Copilot | **Copilot Prompt File** — on-demand invocable prompt | 8 min |
 | 12 | `12-copilot-skill` | Customizing Copilot | **Copilot Skill** — packaged, discoverable, reusable capability | 8 min |
+| 13 | `13-copilot-hooks` | Customizing Copilot | **Copilot Hooks** — lifecycle automation, security guardrails & audit logging | 8 min |
 
 ---
 
@@ -386,6 +387,59 @@ reference assets that guide consistent, high-quality output.
 - Store skills in `.github/skills/` to share with the team, or `~/.copilot/skills/` for personal use
 - Install community skills: `gh skill install github/awesome-copilot <skill-name>`
 - Skills vs. Prompt Files: prompts need explicit `/` invocation; skills are discovered by agents automatically
+
+---
+
+## Demo 13 — Copilot Hooks (`13-copilot-hooks`)
+
+**What it shows:** How `.github/hooks/*.json` files execute shell commands at Copilot lifecycle events (`sessionStart`, `preToolUse`, `postToolUse`, `sessionEnd`) to enforce security policies, audit tool use, and log sessions — automatically, with zero user interaction.
+
+**Files:**
+
+| File | Purpose |
+|------|---------|
+| `notification_service.py` | Demo target — undocumented Python notification service (Email / SMS / Push) |
+| `dev-guardrails.json` | Hook configuration — wires 4 lifecycle events to scripts |
+| `scripts/pre-tool-guard.sh` / `.ps1` | `preToolUse` hook — blocks dangerous shell commands |
+| `scripts/session-logger.sh` / `.ps1` | `sessionStart` / `sessionEnd` hook — logs session boundaries |
+| `scripts/audit-logger.sh` / `.ps1` | `postToolUse` hook — appends every tool call to an audit log |
+
+**Copilot customizations at a glance:**
+
+| Mechanism | Activation | Best for |
+|-----------|-----------|----------|
+| Instructions | Always active | Coding standards & tone |
+| Agent | Mode picker | Specialized workflows |
+| Prompt File | Explicit `/command` | Reusable tasks |
+| Skill | Auto-discovered | Reusable domain knowledge |
+| **Hook** | **Automatic at lifecycle events** | **Automation, guardrails, auditing** |
+
+**Setup:**
+
+```bash
+mkdir -p .github/hooks/scripts
+cp 13-copilot-hooks/dev-guardrails.json .github/hooks/
+cp 13-copilot-hooks/scripts/* .github/hooks/scripts/
+chmod +x .github/hooks/scripts/*.sh
+```
+
+**How to demo:**
+
+1. Open `notification_service.py`, switch to **Agent** mode
+2. Ask: *"Add Google-style docstrings to all public members"*
+3. While the agent runs, open `logs/tool-audit.jsonl` — watch entries appear for each tool call
+4. Open `logs/sessions.log` — show the `sessionStart` record
+5. **Trigger the deny:** Ask the agent *"Remove all .pyc files using rm -rf __pycache__/"* — watch `pre-tool-guard` block it
+6. Open `dev-guardrails.json` and `scripts/pre-tool-guard.sh` — walk through the `BLOCKED_PATTERNS` array
+7. Live edit: add a new pattern, reload, try to trigger it
+
+**Key talking points:**
+- Hooks run **automatically** — zero user interaction required; users cannot bypass them
+- `preToolUse` is **fail-closed**: if the script crashes the tool call is **denied**, never silently allowed
+- Hooks receive full JSON context (tool name, arguments, session ID) via stdin
+- Use hooks for **compliance/audit logging**, **security guardrails**, and **CI enforcement**
+- `.github/hooks/` = repository-wide; `~/.copilot/hooks/` = personal across all projects
+- Hooks are **language-agnostic** — the same JSON config and scripts work for any codebase
 
 ---
 
