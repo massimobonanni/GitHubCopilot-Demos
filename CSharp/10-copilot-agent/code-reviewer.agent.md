@@ -5,9 +5,7 @@ description: >
   vulnerabilities, performance issues, error handling, code style, and
   documentation completeness. Produces a structured, prioritised report.
 tools:
-  - search/codebase
-  - read/problems
-  - changes
+  [read/problems, search/codebase]
 ---
 
 You are a senior C# engineer specialising in code quality and security.
