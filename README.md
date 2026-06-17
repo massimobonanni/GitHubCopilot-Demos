@@ -1,13 +1,8 @@
-# GH-300-Demos
+# GitHub Copilot Demos
 
 ## Goal
 
-This repository contains demo examples for the **GH-300: GitHub Copilot Fundamentals** course. The demos are designed to showcase GitHub Copilot's key capabilities during live training sessions, covering topics such as code completions, chat-based refactoring, test generation, documentation, prompt engineering, bug detection, and code explanation.
-
-The course is split into two parts, available on Microsoft Learn:
-
-- [GitHub Copilot Fundamentals — Part 1 of 2](https://learn.microsoft.com/en-us/training/paths/copilot/)
-- [GitHub Copilot Fundamentals — Part 2 of 2](https://learn.microsoft.com/en-us/training/paths/gh-copilot-2/)
+This repository contains demo examples for **GitHub Copilot** courses. The demos are designed to showcase GitHub Copilot's key capabilities during live training sessions, covering topics such as code completions, chat-based refactoring, test generation, documentation, prompt engineering, bug detection, and code explanation.
 
 ---
 
