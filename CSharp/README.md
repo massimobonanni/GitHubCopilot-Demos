@@ -223,7 +223,7 @@ that Copilot automatically applies to every suggestion — without repeating rul
 - `coding-standards.instructions.md` — the instructions file to install in the workspace
 
 **Setup (do this before the demo):**
-1. Copy `coding-standards.instructions.md` to `.vscode/instructions/coding-standards.instructions.md`
+1. Copy `coding-standards.instructions.md` to `.github/instructions/coding-standards.instructions.md`
 2. Reload VS Code (Ctrl+Shift+P → *"Developer: Reload Window"*)
 3. Verify the file appears in **Copilot Chat → Manage Instructions**
 
@@ -242,7 +242,7 @@ that Copilot automatically applies to every suggestion — without repeating rul
 **Key talking points:**
 - Instructions files are picked up automatically — zero prompt overhead
 - `applyTo` frontmatter scopes rules to specific file patterns
-- `.vscode/instructions/` = workspace scope; `.github/copilot-instructions.md` = repo-wide
+- `.github/instructions/` = repo scope; shared with the whole team via version control
 - Great for onboarding: new developers get team standards for free
 - Instructions work in both inline completions and Chat
 
@@ -258,7 +258,7 @@ with its own name, system prompt, and toolset — selectable from the Chat mode 
 - `code-reviewer.agent.md` — the custom agent definition to install in the workspace
 
 **Setup (do this before the demo):**
-1. Copy `code-reviewer.agent.md` to `.vscode/code-reviewer.agent.md`
+1. Copy `code-reviewer.agent.md` to `.github/code-reviewer.agent.md`
 2. Reload VS Code (Ctrl+Shift+P → *"Developer: Reload Window"*)
 3. Open Copilot Chat → click the mode picker → verify **Code Reviewer** appears
 
@@ -280,7 +280,7 @@ with its own name, system prompt, and toolset — selectable from the Chat mode 
 - The system prompt shapes every response — the agent is always "in role"
 - Different agents for different workflows: reviewer, architect, test-writer, documenter…
 - Agents can access the codebase, open problems, and recent changes via their `tools` list
-- Stored in `.vscode/` — version-controlled and shared with the whole team
+- Stored in `.github/` — version-controlled and shared with the whole team
 
 ---
 
@@ -297,12 +297,12 @@ distinct from always-on Instructions and persistent Agent modes.
 
 | Feature | When active | File location |
 |---|---|---|
-| Instructions | Always — every suggestion | `.vscode/instructions/*.instructions.md` |
-| Agent | While selected in mode picker | `.vscode/*.agent.md` |
-| **Prompt File** | **When explicitly invoked** | `.vscode/prompts/*.prompt.md` |
+| Instructions | Always — every suggestion | `.github/instructions/*.instructions.md` |
+| Agent | While selected in mode picker | `.github/*.agent.md` |
+| **Prompt File** | **When explicitly invoked** | `.github/prompts/*.prompt.md` |
 
 **Setup (do this before the demo):**
-1. Copy `generate-changelog.prompt.md` to `.vscode/prompts/generate-changelog.prompt.md`
+1. Copy `generate-changelog.prompt.md` to `.github/prompts/generate-changelog.prompt.md`
 2. Reload VS Code (Ctrl+Shift+P → *"Developer: Reload Window"*)
 3. Open Copilot Chat → type `/` → verify **generate-changelog** appears in the list
 
@@ -321,7 +321,7 @@ distinct from always-on Instructions and persistent Agent modes.
 - Prompt files are **invoked on demand** — you decide when to use them
 - `/` is the invocation mechanism — prompt files appear alongside built-in Copilot slash commands
 - `mode: ask` keeps the output in Chat; `mode: edit` would apply changes directly to files
-- Prompt files are version-controlled in `.vscode/prompts/` and shared with the team
+- Prompt files are version-controlled in `.github/prompts/` and shared with the team
 - Build a library of prompt files: `generate-changelog`, `write-adr`, `document-api`, `write-pr-description`…
 
 ---
@@ -341,9 +341,9 @@ reference assets that guide consistent, high-quality output.
 
 | Feature | When active | File location | Invocation |
 |---|---|---|---|
-| Instructions | Always — every suggestion | `.vscode/instructions/*.instructions.md` | Automatic |
-| Agent | While selected in mode picker | `.vscode/*.agent.md` | Manual (mode picker) |
-| Prompt File | When explicitly invoked | `.vscode/prompts/*.prompt.md` | Manual (`/command`) |
+| Instructions | Always — every suggestion | `.github/instructions/*.instructions.md` | Automatic |
+| Agent | While selected in mode picker | `.github/*.agent.md` | Manual (mode picker) |
+| Prompt File | When explicitly invoked | `.github/prompts/*.prompt.md` | Manual (`/command`) |
 | **Skill** | **When relevant to the task** | `.github/skills/<name>/SKILL.md` | **Automatic or `/command`** |
 
 **Key advantages over Prompt Files:**
