@@ -259,6 +259,13 @@ with its own name, system prompt, and toolset — selectable from the Chat mode 
 - `payment_service.py` — a payment module with intentional security and quality issues to review
 - `code-reviewer.agent.md` — the custom agent definition to install in the workspace
 
+**How Agents differ from Instructions:**
+
+| Feature | When active | File location |
+|---|---|---|
+| Instructions | Always — every suggestion | `.github/instructions/*.instructions.md` |
+| **Agent** | **While selected in mode picker** | `.github/*.agent.md` |
+
 **Setup (do this before the demo):**
 1. Copy `code-reviewer.agent.md` to `.github/code-reviewer.agent.md`
 2. Reload VS Code (Ctrl+Shift+P → *"Developer: Reload Window"*)
