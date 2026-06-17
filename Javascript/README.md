@@ -1,6 +1,5 @@
-# GH-300.S — GitHub Copilot Fundamentals: JavaScript Demo Examples
+# JavaScript Demo Examples
 
-These demos accompany the **GH-300.S: Scale Delivery with GitHub Copilot** course.
 Each folder contains a self-contained JavaScript example designed to showcase a specific
 Copilot capability during a live session.
 
