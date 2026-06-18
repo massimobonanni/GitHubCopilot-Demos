@@ -407,6 +407,27 @@ reference assets that guide consistent, high-quality output.
 | `scripts/session-logger.sh` / `.ps1` | `sessionStart` / `sessionEnd` hook — logs session boundaries |
 | `scripts/audit-logger.sh` / `.ps1` | `postToolUse` hook — appends every tool call to an audit log |
 
+**Script Behaviors:**
+
+1. **`pre-tool-guard.sh` / `.ps1`** (`preToolUse` hook)
+   - Runs **before** any tool is executed, examining the requested command or operation
+   - Checks the tool arguments against a predefined list of blocked patterns (e.g., `rm -rf`, `git reset --hard`, `DROP TABLE`)
+   - **Denies the tool call immediately** if a dangerous pattern is detected, preventing the operation and displaying a warning to the user
+   - Acts as a security firewall: high-risk operations fail safely closed with no bypass option
+   - Allows all other tools to proceed normally
+
+2. **`session-logger.sh` / `.ps1`** (`sessionStart` / `sessionEnd` hooks)
+   - Runs at the **beginning** of a Copilot session to record a session start timestamp, user ID, and session context to a log file
+   - Runs at the **end** of a session to record the session end timestamp and summary
+   - Creates an audit trail showing who used Copilot, when, and for how long
+   - Useful for compliance tracking and understanding tool adoption across the team
+
+3. **`audit-logger.sh` / `.ps1`** (`postToolUse` hook)
+   - Runs **after** each tool call completes, recording detailed information about what was executed
+   - Logs the tool name (e.g., `view_file`, `edit_file`, `run_in_terminal`), arguments, result status, and session ID in JSON format to an audit log
+   - Creates a complete record of all file reads, edits, and command executions performed by Copilot during the session
+   - Enables security teams to audit and replay tool usage for compliance or incident investigation
+
 **Copilot customizations at a glance:**
 
 | Mechanism | Activation | Best for |
