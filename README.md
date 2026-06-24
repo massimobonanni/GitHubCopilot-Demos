@@ -11,7 +11,7 @@ This repository contains demo examples for **GitHub Copilot** courses. The demos
 The repository is organized by programming language. Each language folder contains the same set of seven demos, each targeting a specific Copilot feature.
 
 ```
-GH-300-Demos/
+GitHubCopilot-Demos/
 ├── CSharp/       # C# demo examples
 ├── Java/         # Java demo examples
 ├── Javascript/   # JavaScript demo examples
