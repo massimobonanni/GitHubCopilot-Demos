@@ -13,6 +13,7 @@ The repository is organized by programming language. Each language folder contai
 ```
 GH-300-Demos/
 ├── CSharp/       # C# demo examples
+├── Java/         # Java demo examples
 ├── Javascript/   # JavaScript demo examples
 └── Python/       # Python demo examples
 ```
@@ -20,6 +21,7 @@ GH-300-Demos/
 | Folder | Language | README |
 |--------|----------|--------|
 | `CSharp/` | C# (.NET 8+) | [CSharp/README.md](CSharp/README.md) |
+| `Java/` | Java (JDK 17+) | [Java/README.md](Java/README.md) |
 | `Javascript/` | JavaScript (Node.js 18+) | [Javascript/README.md](Javascript/README.md) |
 | `Python/` | Python 3.12+ | [Python/README.md](Python/README.md) |
 
