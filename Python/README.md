@@ -1,7 +1,3 @@
----
-title: Python Demo Examples
----
-
 # Python Demo Examples
 
 Each folder contains a self-contained Python example designed to showcase a specific
