@@ -1,0 +1,41 @@
+title: GitHub Copilot Demos
+description: >-
+  Hands-on demo examples for GitHub Copilot courses — code completions, chat &
+  refactoring, test generation, documentation, prompt engineering, bug
+  detection, plan mode, and Copilot customization — across C#, Java, JavaScript,
+  and Python.
+theme: jekyll-theme-cayman
+show_downloads: false
+
+# GitHub Pages default plugins. Together these let the existing README.md files
+# render with the theme without adding YAML front matter to them:
+#   - optional-front-matter / default-layout: render .md files (no front matter)
+#     as themed pages.
+#   - titles-from-headings: derive each page <title> from its first heading.
+#   - relative-links: rewrite relative links to .md files into their .html URLs.
+#   - readme-index: serve each directory's README.md as that directory's index.
+plugins:
+  - jekyll-optional-front-matter
+  - jekyll-default-layout
+  - jekyll-titles-from-headings
+  - jekyll-relative-links
+  - jekyll-readme-index
+
+# Serve page content verbatim (no Liquid templating) so demo prompt and
+# instruction files that contain curly braces don't break the site build.
+defaults:
+  - scope:
+      path: ""
+    values:
+      layout: default
+      render_with_liquid: false
+
+# Keep build artifacts and tooling out of the published site.
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - vendor
+  - .github
+  - "**/bin"
+  - "**/obj"
+  - "**/node_modules"
