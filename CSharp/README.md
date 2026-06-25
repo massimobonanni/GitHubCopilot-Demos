@@ -1,3 +1,7 @@
+---
+title: C# Demo Examples
+---
+
 #  C# Demo Examples
 
 Each folder contains a self-contained C# example designed to showcase a specific

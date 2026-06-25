@@ -1,3 +1,7 @@
+---
+title: Java Demo Examples
+---
+
 # Java Demo Examples
 
 Each folder contains a self-contained Java example designed to showcase a specific

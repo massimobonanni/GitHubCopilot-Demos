@@ -1,3 +1,7 @@
+---
+title: JavaScript Demo Examples
+---
+
 # JavaScript Demo Examples
 
 Each folder contains a self-contained JavaScript example designed to showcase a specific
