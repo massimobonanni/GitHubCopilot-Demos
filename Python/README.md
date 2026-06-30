@@ -24,6 +24,8 @@ Copilot capability during a live session.
 | 11 | `11-copilot-prompt` | Customizing Copilot | **Copilot Prompt File** — on-demand invocable prompt | 8 min |
 | 12 | `12-copilot-skill` | Customizing Copilot | **Copilot Skill** — packaged, discoverable, reusable capability | 8 min |
 | 13 | `13-copilot-hooks` | Customizing Copilot | **Copilot Hooks** — lifecycle automation, security guardrails & audit logging | 8 min |
+| 14 | `14-issue-to-pr` | Core Developer Workflows | **Issue to Pull Request** — fix a bug end-to-end (issue → fix → PR → merge) | 12 min |
+| 15 | `15-github-agent-task` | Core Developer Workflows | **Agent task on GitHub.com** — delegate work to the coding agent from the browser | 10 min |
 
 ---
 
@@ -467,6 +469,133 @@ chmod +x .github/hooks/scripts/*.sh
 - Use hooks for **compliance/audit logging**, **security guardrails**, and **CI enforcement**
 - `.github/hooks/` = repository-wide; `~/.copilot/hooks/` = personal across all projects
 - Hooks are **language-agnostic** — the same JSON config and scripts work for any codebase
+
+---
+
+## Demo 14 — Issue to Pull Request (`14-issue-to-pr`)
+
+**What it shows:** The complete Copilot-assisted bug-fixing loop — from filing a
+GitHub Issue, to letting Copilot implement the fix, to opening, reviewing, and
+**merging** a Pull Request. This is the "day in the life" demo that ties every
+previous feature together.
+
+**Files:**
+- `shopping_cart.py` — a shopping cart with an intentional discount bug
+- `ISSUE.md` — a ready-to-paste bug report to open as a GitHub Issue
+
+**The bug:** `apply_discount()` treats a percentage coupon as a flat amount — a 10%
+coupon subtracts 10 instead of 10% of the subtotal, so a €150 cart totals **€140**
+instead of the correct **€135**.
+
+**Prerequisites:**
+- This repository pushed to GitHub (so Issues and PRs are available)
+- GitHub Copilot enabled; optionally the **Copilot coding agent** for autonomous fixes
+- `gh` CLI signed in (optional, for the command-line steps)
+
+**How to demo:**
+
+1. **Reproduce the bug** — run the program and read the output:
+   ```bash
+   cd 14-issue-to-pr
+   python shopping_cart.py
+   ```
+   Point out the wrong total (**€140.00**) vs the expected **€135.00**.
+
+2. **Create the Issue** — either paste `ISSUE.md` into a new issue in the GitHub UI,
+   or use the CLI:
+   ```bash
+   gh issue create --title "Percentage coupons applied as a flat amount" \
+     --body-file Python/14-issue-to-pr/ISSUE.md
+   ```
+
+3. **Let Copilot fix it** — choose one path:
+   - **Coding agent (autonomous):** open the issue on GitHub → **Assignees → Copilot**.
+     Copilot creates a branch, implements the fix, and opens a **draft Pull Request**.
+   - **Copilot Chat (interactive):** in VS Code switch to **Agent** mode and ask:
+     *"Fix the bug described in `14-issue-to-pr/ISSUE.md` (issue #N): make `apply_discount`
+     honor `Coupon.is_percentage`, and add pytest tests for both coupon types."*
+
+4. **Review the Pull Request** — open the PR, read the diff, and run the tests with `pytest`.
+   Then ask Copilot to review it: comment **`@copilot review`** on the PR, or use the
+   **Copilot code review** button. Iterate by replying to review comments.
+
+5. **Merge** — approve the PR and choose **Squash and merge**. Because the PR body
+   contains `Fixes #N`, merging **automatically closes the issue**. Delete the branch.
+
+**Key talking points:**
+- Copilot spans the *entire* workflow — issue triage, implementation, review, and merge —
+  not just inline code completion
+- The acceptance-criteria checklist in `ISSUE.md` steers both the fix and the tests
+- `Fixes #N` / `Closes #N` in the PR description links code to the issue and auto-closes it
+- The Copilot coding agent works asynchronously on GitHub; Chat keeps you in the editor —
+  show both and contrast them
+- **You stay accountable:** always review an AI-authored PR before merging (Responsible AI)
+
+---
+
+## Demo 15 — Run an Agent Task on GitHub.com (`15-github-agent-task`)
+
+**What it shows:** How to delegate a whole coding task to the GitHub Copilot
+**coding agent** directly from the browser at **<https://github.com/copilot/agents>** —
+no local editor required. You describe the work in plain language; the agent spins up
+a cloud session, creates a branch, edits files, runs the build/tests, and opens a
+**Pull Request** for you to review.
+
+**Files:**
+- `text_analyzer.py` — a small text-analysis class with only word/character counting implemented
+- `TASK.md` — a ready-to-paste prompt describing the feature work to hand to the agent
+
+**The task:** implement four missing methods (`count_sentences`, `average_word_length`,
+`estimate_reading_time_minutes`, `top_words`), add pytest tests, refresh the demo output,
+and write a short README — all done autonomously by the agent on GitHub.com.
+
+**How this differs from Demo 14:**
+
+| | Demo 14 — Issue to PR | **Demo 15 — Agent task on GitHub.com** |
+|---|---|---|
+| Starting point | A filed GitHub **Issue** | A **natural-language prompt** in the browser |
+| Where you work | VS Code or the issue page | **github.com/copilot/agents** (no editor) |
+| Trigger | Assign the issue to Copilot | Start a task from the Agents page |
+| Result | Branch + Pull Request | Branch + Pull Request |
+
+**Prerequisites:**
+- This repository pushed to GitHub
+- **GitHub Copilot coding agent** enabled for your account/organization
+- Write access to the repository (so the agent can push a branch and open a PR)
+
+**How to demo:**
+
+1. **Show the starting point** — run the program so the audience sees what's missing:
+   ```bash
+   cd 15-github-agent-task
+   python text_analyzer.py
+   ```
+   Point out that sentences, average word length, reading time, and top words are *not* implemented.
+
+2. **Open the Agents page** — go to **<https://github.com/copilot/agents>** in the browser
+   and select this repository (and the `main` branch) as the target.
+
+3. **Start the task** — paste the **Prompt** from `TASK.md` and launch it. Optionally pick a
+   different base branch. The agent starts an asynchronous session running on GitHub.
+
+4. **Watch the session** — open the live agent session and narrate what it does: reads the repo,
+   plans the change, edits `text_analyzer.py`, adds tests, and runs the build/tests. You can keep
+   working elsewhere while it runs in the background.
+
+5. **Review the Pull Request** — when the agent finishes it opens a **draft PR**. Open it, read the
+   diff and the agent's summary, and check the CI run. Request changes by commenting
+   **`@copilot ...`** or using **Copilot code review**; the agent pushes follow-up commits.
+
+6. **Merge** — approve and **Squash and merge**, then delete the branch. Pull locally and re-run
+   the program/tests to confirm the new metrics work.
+
+**Key talking points:**
+- The coding agent runs **on GitHub.com**, not in your editor — great for delegating work from any device, even a phone
+- It works **asynchronously**: start a task, walk away, come back to a finished PR
+- You can launch tasks **without an Issue** — a clear prompt is enough (contrast with Demo 14)
+- The agent operates in a sandboxed GitHub Actions environment; it can run builds and tests before opening the PR
+- **You stay accountable:** the output is a PR you review and approve — never an auto-merge (Responsible AI)
+- A precise prompt with **acceptance criteria** (see `TASK.md`) steers both the implementation and the tests
 
 ---
 

@@ -25,8 +25,7 @@ Copilot capability during a live session.
 | 12 | `12-copilot-skill` | Customizing Copilot | **Copilot Skill** — packaged, discoverable, reusable capability | 8 min |
 | 13 | `13-copilot-hooks` | Customizing Copilot | **Copilot Hooks** — lifecycle automation, security guardrails & audit logging | 8 min |
 | 14 | `14-issue-to-pr` | Core Developer Workflows | **Issue to Pull Request** — fix a bug end-to-end (issue → fix → PR → merge) | 12 min |
-
----
+| 15 | `15-github-agent-task` | Core Developer Workflows | **Agent task on GitHub.com** — delegate work to the coding agent from the browser | 10 min |
 
 ## Demo 1 — Code Completions (`01-code-completions/Inventory.cs`)
 
@@ -529,6 +528,72 @@ instead of the correct **€135**.
 - The Copilot coding agent works asynchronously on GitHub; Chat keeps you in the editor —
   show both and contrast them
 - **You stay accountable:** always review an AI-authored PR before merging (Responsible AI)
+
+---
+
+## Demo 15 — Run an Agent Task on GitHub.com (`15-github-agent-task`)
+
+**What it shows:** How to delegate a whole coding task to the GitHub Copilot
+**coding agent** directly from the browser at **<https://github.com/copilot/agents>** —
+no local editor required. You describe the work in plain language; the agent spins up
+a cloud session, creates a branch, edits files, runs the build/tests, and opens a
+**Pull Request** for you to review.
+
+**Files:**
+- `TextAnalyzer.cs` — a small text-analysis class with only word/character counting implemented
+- `TASK.md` — a ready-to-paste prompt describing the feature work to hand to the agent
+
+**The task:** implement four missing methods (`CountSentences`, `AverageWordLength`,
+`EstimateReadingTimeMinutes`, `TopWords`), add xUnit tests, refresh the demo output,
+and write a short README — all done autonomously by the agent on GitHub.com.
+
+**How this differs from Demo 14:**
+
+| | Demo 14 — Issue to PR | **Demo 15 — Agent task on GitHub.com** |
+|---|---|---|
+| Starting point | A filed GitHub **Issue** | A **natural-language prompt** in the browser |
+| Where you work | VS Code or the issue page | **github.com/copilot/agents** (no editor) |
+| Trigger | Assign the issue to Copilot | Start a task from the Agents page |
+| Result | Branch + Pull Request | Branch + Pull Request |
+
+**Prerequisites:**
+- This repository pushed to GitHub
+- **GitHub Copilot coding agent** enabled for your account/organization
+- Write access to the repository (so the agent can push a branch and open a PR)
+
+**How to demo:**
+
+1. **Show the starting point** — run the program locally so the audience sees what's missing:
+   ```bash
+   cd 15-github-agent-task
+   dotnet run
+   ```
+   Point out that sentences, average word length, reading time, and top words are *not* implemented.
+
+2. **Open the Agents page** — go to **<https://github.com/copilot/agents>** in the browser
+   and select this repository (and the `main` branch) as the target.
+
+3. **Start the task** — paste the **Prompt** from `TASK.md` and launch it. Optionally pick a
+   different base branch. The agent starts an asynchronous session running on GitHub.
+
+4. **Watch the session** — open the live agent session and narrate what it does: reads the repo,
+   plans the change, edits `TextAnalyzer.cs`, adds tests, and runs the build/tests. You can keep
+   working elsewhere while it runs in the background.
+
+5. **Review the Pull Request** — when the agent finishes it opens a **draft PR**. Open it, read the
+   diff and the agent's summary, and check the CI run. Request changes by commenting
+   **`@copilot ...`** or using **Copilot code review**; the agent pushes follow-up commits.
+
+6. **Merge** — approve and **Squash and merge**, then delete the branch. Pull locally and re-run
+   `dotnet run` / `dotnet test` to confirm the new metrics work.
+
+**Key talking points:**
+- The coding agent runs **on GitHub.com**, not in your editor — great for delegating work from any device, even a phone
+- It works **asynchronously**: start a task, walk away, come back to a finished PR
+- You can launch tasks **without an Issue** — a clear prompt is enough (contrast with Demo 14)
+- The agent operates in a sandboxed GitHub Actions environment; it can run builds and tests before opening the PR
+- **You stay accountable:** the output is a PR you review and approve — never an auto-merge (Responsible AI)
+- A precise prompt with **acceptance criteria** (see `TASK.md`) steers both the implementation and the tests
 
 ---
 

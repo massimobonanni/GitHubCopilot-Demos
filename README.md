@@ -8,7 +8,7 @@ This repository contains demo examples for **GitHub Copilot** courses. The demos
 
 ## Project Structure
 
-The repository is organized by programming language. Each language folder contains the same set of fourteen demos, each targeting a specific Copilot feature.
+The repository is organized by programming language. Each language folder contains the same set of fifteen demos, each targeting a specific Copilot feature.
 
 ```
 GitHubCopilot-Demos/
@@ -43,3 +43,4 @@ Each sub-folder contains the following demos:
 | 12 | `12-copilot-skill` | Copilot Skill — packaged, discoverable, reusable capability |
 | 13 | `13-copilot-hooks` | Copilot Hooks — lifecycle automation, security guardrails & audit logging |
 | 14 | `14-issue-to-pr` | Issue to Pull Request — fix a bug end-to-end (issue → Copilot fix → PR → merge) |
+| 15 | `15-github-agent-task` | Run an Agent Task on GitHub.com — delegate work to the coding agent from the browser |
