@@ -483,7 +483,7 @@ chmod +x .github/hooks/scripts/*.sh
 ## Quick Start
 
 ```bash
-cd GH-300-Demos/javascript
+cd GitHubCopilot-Demos/javascript
 
 # Verify all runnable examples:
 node 02-chat-and-refactoring/orders.js

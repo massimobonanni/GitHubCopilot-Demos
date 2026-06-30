@@ -487,7 +487,7 @@ chmod +x .github/hooks/scripts/*.sh
 
 ```bash
 # Clone/copy the folder, then:
-cd GH-300-Demos
+cd GitHubCopilot-Demos
 pip install pytest
 
 # Verify all examples run:

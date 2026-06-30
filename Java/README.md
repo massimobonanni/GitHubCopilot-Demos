@@ -491,7 +491,7 @@ chmod +x .github/hooks/scripts/*.sh
 
 ```bash
 # Clone/copy the folder, then:
-cd GH-300-Demos/Java
+cd GitHubCopilot-Demos/Java
 
 # Verify Java environment:
 javac -version
