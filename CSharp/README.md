@@ -24,6 +24,7 @@ Copilot capability during a live session.
 | 11 | `11-copilot-prompt` | Customizing Copilot | **Copilot Prompt File** — on-demand invocable prompt | 8 min |
 | 12 | `12-copilot-skill` | Customizing Copilot | **Copilot Skill** — packaged, discoverable, reusable capability | 8 min |
 | 13 | `13-copilot-hooks` | Customizing Copilot | **Copilot Hooks** — lifecycle automation, security guardrails & audit logging | 8 min |
+| 14 | `14-issue-to-pr` | Core Developer Workflows | **Issue to Pull Request** — fix a bug end-to-end (issue → fix → PR → merge) | 12 min |
 
 ---
 
@@ -467,6 +468,70 @@ chmod +x .github/hooks/scripts/*.sh
 
 ---
 
+## Demo 14 — Issue to Pull Request (`14-issue-to-pr`)
+
+**What it shows:** The complete Copilot-assisted bug-fixing loop — from filing a
+GitHub Issue, to letting Copilot implement the fix, to opening, reviewing, and
+**merging** a Pull Request. This is the "day in the life" demo that ties every
+previous feature together.
+
+**Files:**
+- `ShoppingCart.cs` — a shopping cart with an intentional discount bug
+- `ISSUE.md` — a ready-to-paste bug report to open as a GitHub Issue
+
+**The bug:** `ApplyDiscount()` treats a percentage coupon as a flat amount — a 10%
+coupon subtracts €10 instead of 10% of the subtotal, so a €150 cart totals **€140**
+instead of the correct **€135**.
+
+**Prerequisites:**
+- This repository pushed to GitHub (so Issues and PRs are available)
+- GitHub Copilot enabled; optionally the **Copilot coding agent** for autonomous fixes
+- `gh` CLI signed in (optional, for the command-line steps)
+
+**How to demo:**
+
+1. **Reproduce the bug** — run the program and read the output:
+   ```bash
+   cd 14-issue-to-pr
+   dotnet run
+   ```
+   Point out `Actual total (buggy): €140.00` vs `Expected: €135.00`.
+
+2. **Create the Issue** — either paste `ISSUE.md` into a new issue in the GitHub UI,
+   or use the CLI:
+   ```bash
+   gh issue create --title "Percentage coupons applied as a flat amount" \
+     --body-file 14-issue-to-pr/ISSUE.md
+   ```
+
+3. **Let Copilot fix it** — choose one path:
+   - **Coding agent (autonomous):** open the issue on GitHub → **Assignees → Copilot**.
+     Copilot creates a branch, implements the fix, and opens a **draft Pull Request**.
+   - **Copilot Chat (interactive):** in VS Code switch to **Agent** mode and ask:
+     *"Fix the bug described in `14-issue-to-pr/ISSUE.md` (issue #N): make `ApplyDiscount`
+     honor `Coupon.IsPercentage`, and add xUnit tests for both coupon types."*
+
+4. **Review the Pull Request** — open the PR, read the diff, and run the tests:
+   ```bash
+   dotnet test
+   ```
+   Then ask Copilot to review it: comment **`@copilot review`** on the PR, or use the
+   **Copilot code review** button. Iterate by replying to review comments.
+
+5. **Merge** — approve the PR and choose **Squash and merge**. Because the PR body
+   contains `Fixes #N`, merging **automatically closes the issue**. Delete the branch.
+
+**Key talking points:**
+- Copilot spans the *entire* workflow — issue triage, implementation, review, and merge —
+  not just inline code completion
+- The acceptance-criteria checklist in `ISSUE.md` steers both the fix and the tests
+- `Fixes #N` / `Closes #N` in the PR description links code to the issue and auto-closes it
+- The Copilot coding agent works asynchronously on GitHub; Chat keeps you in the editor —
+  show both and contrast them
+- **You stay accountable:** always review an AI-authored PR before merging (Responsible AI)
+
+---
+
 ## Tips for the Presenter
 
 1. **Build each example first** to ensure everything compiles in your environment
@@ -490,14 +555,4 @@ cd 07-explain-and-debug
 dotnet new console -n LegacyParser --force
 # Replace Program.cs with LegacyParser.cs content, or use top-level statements
 dotnet run
-```
-
-Or create a single solution for all demos:
-
-```bash
-dotnet new sln -n GH300Demos
-dotnet new console -n Demo01 -o 01-code-completions
-dotnet new console -n Demo02 -o 02-chat-and-refactoring
-# ... repeat for each
-dotnet sln add 01-code-completions 02-chat-and-refactoring ...
 ```
