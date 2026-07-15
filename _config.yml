@@ -4,7 +4,7 @@ description: >-
   refactoring, test generation, documentation, prompt engineering, bug
   detection, plan mode, and Copilot customization — across C#, Java, JavaScript,
   and Python.
-theme: jekyll-theme-cayman
+theme: jekyll-theme-architect
 show_downloads: false
 
 # GitHub Pages default plugins. Together these let the existing README.md files
