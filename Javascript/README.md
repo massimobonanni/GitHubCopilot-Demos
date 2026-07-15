@@ -7,27 +7,31 @@ Copilot capability during a live session.
 
 ---
 
+<a id="demo-map"></a>
+
 ## Demo Map
 
 | # | Folder | Course Topic | Copilot Feature | Time |
 |---|--------|-------------|-----------------|------|
-| 1 | `01-code-completions` | Where Copilot Shows Up | **Inline suggestions** (Tab/Esc) | 5 min |
-| 2 | `02-chat-and-refactoring` | Suggestions vs. Chat | **Chat & Inline Chat** refactoring | 8 min |
-| 3 | `03-test-generation` | Testing & Quality Workflows | **Test generation** (`/tests`) | 8 min |
-| 4 | `04-documentation` | Developer Flow → Document | **JSDoc & README generation** | 5 min |
-| 5 | `05-prompt-engineering` | Prompt Engineering: The 4 S's | **Prompt quality comparison** | 8 min |
-| 6 | `06-bug-detection` | Responsible AI & Validation | **Security review & bug finding** | 8 min |
-| 7 | `07-explain-and-debug` | Core Developer Workflows | **Code explanation & optimization** | 5 min |
-| 8 | `08-plan-mode` | Suggestions vs. Chat (Modes) | **Plan mode** — research & outline | 8 min |
-| 9 | `09-copilot-instructions` | Customizing Copilot | **Copilot Instructions** — project-wide coding standards | 8 min |
-| 10 | `10-copilot-agent` | Customizing Copilot | **Custom Copilot Agent** — reusable chat participant | 8 min |
-| 11 | `11-copilot-prompt` | Customizing Copilot | **Copilot Prompt File** — on-demand invocable prompt | 8 min |
-| 12 | `12-copilot-skill` | Customizing Copilot | **Copilot Skill** — packaged, discoverable, reusable capability | 8 min |
-| 13 | `13-copilot-hooks` | Customizing Copilot | **Copilot Hooks** — lifecycle automation, security guardrails & audit logging | 8 min |
-| 14 | `14-issue-to-pr` | Core Developer Workflows | **Issue to Pull Request** — fix a bug end-to-end (issue → fix → PR → merge) | 12 min |
-| 15 | `15-github-agent-task` | Core Developer Workflows | **Agent task on GitHub.com** — delegate work to the coding agent from the browser | 10 min |
+| [1](#demo-1) | `01-code-completions` | Where Copilot Shows Up | **Inline suggestions** (Tab/Esc) | 5 min |
+| [2](#demo-2) | `02-chat-and-refactoring` | Suggestions vs. Chat | **Chat & Inline Chat** refactoring | 8 min |
+| [3](#demo-3) | `03-test-generation` | Testing & Quality Workflows | **Test generation** (`/tests`) | 8 min |
+| [4](#demo-4) | `04-documentation` | Developer Flow → Document | **JSDoc & README generation** | 5 min |
+| [5](#demo-5) | `05-prompt-engineering` | Prompt Engineering: The 4 S's | **Prompt quality comparison** | 8 min |
+| [6](#demo-6) | `06-bug-detection` | Responsible AI & Validation | **Security review & bug finding** | 8 min |
+| [7](#demo-7) | `07-explain-and-debug` | Core Developer Workflows | **Code explanation & optimization** | 5 min |
+| [8](#demo-8) | `08-plan-mode` | Suggestions vs. Chat (Modes) | **Plan mode** — research & outline | 8 min |
+| [9](#demo-9) | `09-copilot-instructions` | Customizing Copilot | **Copilot Instructions** — project-wide coding standards | 8 min |
+| [10](#demo-10) | `10-copilot-agent` | Customizing Copilot | **Custom Copilot Agent** — reusable chat participant | 8 min |
+| [11](#demo-11) | `11-copilot-prompt` | Customizing Copilot | **Copilot Prompt File** — on-demand invocable prompt | 8 min |
+| [12](#demo-12) | `12-copilot-skill` | Customizing Copilot | **Copilot Skill** — packaged, discoverable, reusable capability | 8 min |
+| [13](#demo-13) | `13-copilot-hooks` | Customizing Copilot | **Copilot Hooks** — lifecycle automation, security guardrails & audit logging | 8 min |
+| [14](#demo-14) | `14-issue-to-pr` | Core Developer Workflows | **Issue to Pull Request** — fix a bug end-to-end (issue → fix → PR → merge) | 12 min |
+| [15](#demo-15) | `15-github-agent-task` | Core Developer Workflows | **Agent task on GitHub.com** — delegate work to the coding agent from the browser | 10 min |
 
 ---
+
+<a id="demo-1"></a>
 
 ## Demo 1 — Code Completions (`01-code-completions/inventory.js`)
 
@@ -49,7 +53,12 @@ Copilot capability during a live session.
 - The better the comment, the better the suggestion (4 S's preview)
 - Always review before accepting
 
+
+[⬆ Back to Demo Map](#demo-map)
+
 ---
+
+<a id="demo-2"></a>
 
 ## Demo 2 — Chat & Refactoring (`02-chat-and-refactoring/orders.js`)
 
@@ -72,7 +81,12 @@ shipping-cost logic, and string-concatenation receipt formatting.
 - Copilot suggests modern JS idioms: destructuring, `??`, optional chaining
 - Always run the code after refactoring
 
+
+[⬆ Back to Demo Map](#demo-map)
+
 ---
+
+<a id="demo-3"></a>
 
 ## Demo 3 — Test Generation (`03-test-generation/calculator.js`)
 
@@ -94,7 +108,12 @@ a `UnitConverter` object with conversion methods. Fully implemented, zero tests.
 - Tests still need human review — does the expected value make sense?
 - Use Copilot for the boilerplate, add domain-specific assertions yourself
 
+
+[⬆ Back to Demo Map](#demo-map)
+
 ---
+
+<a id="demo-4"></a>
 
 ## Demo 4 — Documentation (`04-documentation/weatherClient.js`)
 
@@ -114,7 +133,12 @@ It works but has zero documentation — no JSDoc, no comments, no README.
 - The generated docs are a starting point — verify the descriptions are accurate
 - Great for onboarding: generate docs for legacy code new team members need to learn
 
+
+[⬆ Back to Demo Map](#demo-map)
+
 ---
+
+<a id="demo-5"></a>
 
 ## Demo 5 — Prompt Engineering: The 4 S's (`05-prompt-engineering/prompts.js`)
 
@@ -138,7 +162,12 @@ It works but has zero documentation — no JSDoc, no comments, no README.
 - Short: detailed ≠ long — be precise, not verbose
 - Surround: good names, JSDoc types, and typedefs are implicit prompts
 
+
+[⬆ Back to Demo Map](#demo-map)
+
 ---
+
+<a id="demo-6"></a>
 
 ## Demo 6 — Bug Detection & Code Review (`06-bug-detection/buggyAuth.js`)
 
@@ -161,7 +190,12 @@ tokens, and password logging.
 - Developer accountability remains — always validate
 - Maps to the "Key Risks" slide: incorrect logic, security gaps, over-reliance
 
+
+[⬆ Back to Demo Map](#demo-map)
+
 ---
+
+<a id="demo-7"></a>
 
 ## Demo 7 — Explain Code & Debug (`07-explain-and-debug/legacyParser.js`)
 
@@ -184,7 +218,12 @@ O(n²) duplicate-detection bug. The code works but is hard to read and slow at s
 - Regex explanation alone saves significant debugging time
 - Performance optimization: Copilot spots algorithmic issues humans easily miss
 
+
+[⬆ Back to Demo Map](#demo-map)
+
 ---
+
+<a id="demo-8"></a>
 
 ## Demo 8 — Plan Mode (`08-plan-mode/taskManager.js`)
 
@@ -212,7 +251,12 @@ deliberately "ready for the next step" so Plan mode has something meaningful to 
 - Perfect for complex features, onboarding, and multi-file changes
 - Maps to the slide: "Plan (Research and outline multi-step plans)"
 
+
+[⬆ Back to Demo Map](#demo-map)
+
 ---
+
+<a id="demo-9"></a>
 
 ## Demo 9 — Copilot Instructions (`09-copilot-instructions/orderProcessor.js`)
 
@@ -247,7 +291,12 @@ that Copilot automatically applies to every suggestion — without repeating rul
 - Great for onboarding: new developers get team standards for free
 - Instructions work in both inline completions and Chat
 
+
+[⬆ Back to Demo Map](#demo-map)
+
 ---
+
+<a id="demo-10"></a>
 
 ## Demo 10 — Custom Copilot Agent (`10-copilot-agent/paymentService.js`)
 
@@ -290,7 +339,12 @@ with its own name, system prompt, and toolset — selectable from the Chat mode 
 - Agents can access the codebase, open problems, and recent changes via their `tools` list
 - Stored in `.github/` — version-controlled and shared with the whole team
 
+
+[⬆ Back to Demo Map](#demo-map)
+
 ---
+
+<a id="demo-11"></a>
 
 ## Demo 11 — Copilot Prompt File (`11-copilot-prompt/productCatalog.js`)
 
@@ -332,7 +386,12 @@ distinct from always-on Instructions and persistent Agent modes.
 - Prompt files are version-controlled in `.github/prompts/` and shared with the team
 - Build a library of prompt files: `generate-changelog`, `write-adr`, `document-api`, `write-pr-description`…
 
+
+[⬆ Back to Demo Map](#demo-map)
+
 ---
+
+<a id="demo-12"></a>
 
 ## Demo 12 — Copilot Skill (`12-copilot-skill/customerService.js`)
 
@@ -393,7 +452,12 @@ reference assets that guide consistent, high-quality output.
 - Install community skills: `gh skill install github/awesome-copilot <skill-name>`
 - Skills vs. Prompt Files: prompts need explicit `/` invocation; skills are discovered by agents automatically
 
+
+[⬆ Back to Demo Map](#demo-map)
+
 ---
+
+<a id="demo-13"></a>
 
 ## Demo 13 — Copilot Hooks (`13-copilot-hooks`)
 
@@ -467,7 +531,12 @@ chmod +x .github/hooks/scripts/*.sh
 - `.github/hooks/` = repository-wide; `~/.copilot/hooks/` = personal across all projects
 - Hooks are **language-agnostic** — the same JSON config and scripts work for any codebase
 
+
+[⬆ Back to Demo Map](#demo-map)
+
 ---
+
+<a id="demo-14"></a>
 
 ## Demo 14 — Issue to Pull Request (`14-issue-to-pr`)
 
@@ -528,7 +597,12 @@ instead of the correct **€135**.
   show both and contrast them
 - **You stay accountable:** always review an AI-authored PR before merging (Responsible AI)
 
+
+[⬆ Back to Demo Map](#demo-map)
+
 ---
+
+<a id="demo-15"></a>
 
 ## Demo 15 — Run an Agent Task on GitHub.com (`15-github-agent-task`)
 
@@ -593,6 +667,9 @@ and write a short README — all done autonomously by the agent on GitHub.com.
 - The agent operates in a sandboxed GitHub Actions environment; it can run builds and tests before opening the PR
 - **You stay accountable:** the output is a PR you review and approve — never an auto-merge (Responsible AI)
 - A precise prompt with **acceptance criteria** (see `TASK.md`) steers both the implementation and the tests
+
+
+[⬆ Back to Demo Map](#demo-map)
 
 ---
 
