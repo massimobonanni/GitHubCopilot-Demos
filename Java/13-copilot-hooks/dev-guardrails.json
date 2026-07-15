@@ -1,6 +1,15 @@
 {
   "version": 1,
   "hooks": {
+    "preSendMessage": [
+      {
+        "type": "command",
+        "bash": ".github/hooks/scripts/prompt-word-filter.sh",
+        "powershell": ".github/hooks/scripts/prompt-word-filter.ps1",
+        "cwd": ".",
+        "timeoutSec": 10
+      }
+    ],
     "sessionStart": [
       {
         "type": "command",
