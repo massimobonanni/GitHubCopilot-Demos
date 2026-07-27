@@ -28,6 +28,7 @@ Copilot capability during a live session.
 | [13](#demo-13) | `13-copilot-hooks` | Customizing Copilot | **Copilot Hooks** — lifecycle automation, security guardrails & audit logging | 8 min |
 | [14](#demo-14) | `14-issue-to-pr` | Core Developer Workflows | **Issue to Pull Request** — fix a bug end-to-end (issue → fix → PR → merge) | 12 min |
 | [15](#demo-15) | `15-github-agent-task` | Core Developer Workflows | **Agent task on GitHub.com** — delegate work to the coding agent from the browser | 10 min |
+| [16](#demo-16) | `16-multi-agent-pr-review` | Customizing Copilot | **Multi-Agent PR Quality Gate** — a coordinator agent delegates to specialist sub-agents to review a Pull Request | 12 min |
 
 ---
 
@@ -925,6 +926,140 @@ and write a short README — all done autonomously by the agent on GitHub.com.
 - The agent operates in a sandboxed GitHub Actions environment; it can run builds and tests before opening the PR
 - **You stay accountable:** the output is a PR you review and approve — never an auto-merge (Responsible AI)
 - A precise prompt with **acceptance criteria** (see `TASK.md`) steers both the implementation and the tests
+
+[⬆ Back to Demo Map](#demo-map)
+
+---
+
+<a id="demo-16"></a>
+
+## Demo 16 — Multi-Agent PR Quality Gate (`16-multi-agent-pr-review`)
+
+**What it shows:** How several `.agent.md` files compose into a **multi-agent workflow**.
+A coordinator agent (`pr-quality-gate`) **delegates** to two specialist sub-agents —
+`requirements-analyst` and `implementation-reviewer` — to review a Pull Request and
+return a single, evidence-based **PASS / PASS WITH WARNINGS / BLOCK** decision. This is
+Demo 10 taken to the next level: not one custom agent, but a team of agents that call
+each other via the `agent` tool.
+
+**Files:**
+
+- `promoService.js` — the feature implementation under review (promo-code redemption at checkout, with two intentional defects)
+- `promoService.test.js` — the Jest tests submitted with the PR (they all **pass**, but only cover the happy paths)
+- `PR.md` — the Pull Request description with 7 acceptance criteria — the specification the agents review against
+- `pr-quality-gate.agent.md` — the **coordinator** agent (tools: `read`, `search`, `agent`)
+- `requirements-analyst.agent.md` — sub-agent that extracts testable acceptance criteria (tools: `read`, `search`)
+- `implementation-reviewer.agent.md` — sub-agent that maps code + tests to criteria and runs the tests (tools: `read`, `search`, `execute`)
+
+**How this differs from Demo 10 (single custom agent):**
+
+| | Demo 10 — Custom Agent | **Demo 16 — Multi-Agent** |
+| --- | --- | --- |
+| Number of agents | One | **Three (1 coordinator + 2 specialists)** |
+| Composition | Standalone | **Coordinator delegates via the `agent` tool** |
+| Output | A single review | **A reconciled decision built from two specialist handoffs** |
+| Location | `.github/*.agent.md` | `.github/agents/*.agent.md` |
+
+**The scenario:** the PR adds `PromoService.apply(code, subtotal)`. It runs and the three
+submitted tests pass — but it hides **two defects** the quality gate should catch by
+comparing the code against `PR.md`:
+
+- **AC-04 not met** — codes are matched with a case-sensitive comparison, so `save10` fails to match `SAVE10`.
+- **AC-05 partial** — a `>` instead of `>=` wrongly rejects a promo at exactly its `minimumSubtotal` (off-by-one).
+- Plus a **coverage gap**: no tests exist for the case-insensitive or boundary cases, so the green test run is misleading.
+
+**Setup (do this before the demo):**
+
+1. Copy all three agent files into the workspace agents folder:
+
+   ```bash
+   mkdir -p .github/agents
+   cp Javascript/16-multi-agent-pr-review/pr-quality-gate.agent.md      .github/agents/
+   cp Javascript/16-multi-agent-pr-review/requirements-analyst.agent.md .github/agents/
+   cp Javascript/16-multi-agent-pr-review/implementation-reviewer.agent.md .github/agents/
+
+   ```
+
+2. Reload VS Code (Ctrl+Shift+P → *"Developer: Reload Window"*)
+3. Open Copilot Chat → click the mode picker → verify **pr-quality-gate** appears
+
+**Create the Pull Request (the review target):**
+
+1. Put this folder's changes on a feature branch and push it:
+
+   ```bash
+   git checkout -b feature/promo-codes
+   git add Javascript/16-multi-agent-pr-review/promoService.js Javascript/16-multi-agent-pr-review/promoService.test.js
+   git commit -m "Add promo-code redemption at checkout"
+   git push -u origin feature/promo-codes
+
+   ```
+
+2. Open the PR, using the contents of `PR.md` as the description (paste it, or use the CLI):
+
+   ```bash
+   gh pr create --title "Add promo-code redemption at checkout" \
+     --body-file Javascript/16-multi-agent-pr-review/PR.md
+
+   ```
+
+   > No GitHub remote handy? You can still run the gate locally — the coordinator
+   > will treat the acceptance criteria in `PR.md` as the specification.
+
+**How to demo:**
+
+1. (Optional) Run the feature so the audience sees it "working":
+
+   ```bash
+   cd 16-multi-agent-pr-review
+   node promoService.js
+
+   ```
+
+   `SAVE10` and `WELCOME` compute correctly — the defects are hidden until reviewed against `PR.md`.
+
+2. Switch Chat to the **pr-quality-gate** agent and start the review:
+
+   ```text
+
+   Review the pull request for the promo-code feature. The specification is in
+   Javascript/16-multi-agent-pr-review/PR.md and the changed files are promoService.js
+   and promoService.test.js.
+
+   ```
+
+3. **Narrate the delegation** as it happens:
+   - `pr-quality-gate` calls **`requirements-analyst`** → returns AC-01…AC-07 as a testable checklist
+   - it then calls **`implementation-reviewer`** → reads the diff, runs `npx jest` (all pass), and maps each AC to evidence
+   - the coordinator **reconciles** both handoffs into one report
+
+4. **Read the decision** — expected result is **BLOCK**, with evidence:
+   - AC-04 → *Not met* (`promoService.js` — case-sensitive `p.code === code`)
+   - AC-05 → *Partial* (`promoService.js` — `subtotal > promo.minimumSubtotal` should be `>=`)
+   - AC-07 → *Partial* (tests pass but miss the case-insensitive and boundary cases)
+   - Finding → opaque `TypeError` when `find()` returns undefined for an unknown code
+
+5. **Post the review on the PR** — copy the report into a PR comment, or on GitHub comment
+
+   **`@copilot review`** to compare the coding agent's own review with the multi-agent gate.
+
+6. **Fix and re-run** — switch to **Agent** mode, ask it to make matching case-insensitive,
+
+   change `>` to `>=`, and add the missing tests. Re-run **pr-quality-gate** → the decision
+   should flip to **PASS**.
+
+7. Bonus: open `pr-quality-gate.agent.md` and show the `tools: ["read", "search", "agent"]`
+
+   line — the `agent` tool is what lets a coordinator call other agents.
+
+**Key talking points:**
+
+- **Agents can call agents.** The `agent` tool turns a flat chat participant into an orchestrator — a coordinator plus focused specialists.
+- **Separation of concerns:** the analyst only extracts *what* is required; the reviewer only checks *whether* the code meets it. Each has a narrow, auditable job.
+- **Least privilege by design:** the analyst has no `execute` tool, so it can't run commands; only the reviewer can run tests. All three are **read-only** — they never edit, commit, or merge.
+- **Green tests ≠ correct code.** The gate marks AC-04/AC-05 from the *code*, not from the *passing* tests, and flags the coverage gap explicitly.
+- **Evidence over opinion:** every AC status cites a file, line, or command result — the decision is defensible in a PR review.
+- **You stay accountable:** the gate produces a recommendation you paste into the PR — a human still approves and merges (Responsible AI).
 
 [⬆ Back to Demo Map](#demo-map)
 
