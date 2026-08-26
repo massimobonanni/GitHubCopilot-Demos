@@ -8,7 +8,7 @@ This repository contains demo examples for **GitHub Copilot** courses. The demos
 
 ## Project Structure
 
-The repository is organized by programming language. Each language folder contains the same core set of sixteen demos, each targeting a specific Copilot feature. The C#, JavaScript, and Python tracks also include a GitHub Copilot CLI demo.
+The repository is organized by programming language. Each language folder contains the same core set of sixteen demos, each targeting a specific Copilot feature. Every language track also includes a GitHub Copilot CLI demo.
 
 ```
 GitHubCopilot-Demos/
@@ -46,5 +46,5 @@ Each sub-folder contains the following demos:
 | 15 | `15-github-agent-task` | Run an Agent Task on GitHub.com — delegate work to the coding agent from the browser |
 | 16 | `16-multi-agent-pr-review` | Multi-Agent PR Quality Gate — a coordinator agent delegates to specialist sub-agents to review a Pull Request |
 
-The C#, JavaScript, and Python tracks add `17-github-copilot-cli`, a terminal-native
-workflow covering planning, implementation, test execution, tool approvals, and code review.
+Every language track adds `17-github-copilot-cli`, a terminal-native workflow covering
+planning, implementation, test execution, tool approvals, and code review.
