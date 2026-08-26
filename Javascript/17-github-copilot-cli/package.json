@@ -1,0 +1,11 @@
+{
+  "name": "github-copilot-cli-demo",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "test": "node --test issueDesk.test.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
