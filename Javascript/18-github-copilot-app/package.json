@@ -1,0 +1,13 @@
+{
+  "name": "github-copilot-app-demo",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "test": "node --test",
+    "test:sprint": "node --test sprintPlanner.test.js",
+    "test:risk": "node --test riskAnalyzer.test.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
