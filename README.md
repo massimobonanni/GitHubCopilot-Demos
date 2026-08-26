@@ -45,6 +45,4 @@ Each sub-folder contains the following demos:
 | 14 | `14-issue-to-pr` | Issue to Pull Request — fix a bug end-to-end (issue → Copilot fix → PR → merge) |
 | 15 | `15-github-agent-task` | Run an Agent Task on GitHub.com — delegate work to the coding agent from the browser |
 | 16 | `16-multi-agent-pr-review` | Multi-Agent PR Quality Gate — a coordinator agent delegates to specialist sub-agents to review a Pull Request |
-
-Every language track adds `17-github-copilot-cli`, a terminal-native workflow covering
-planning, implementation, test execution, tool approvals, and code review.
+| 17 | `17-github-copilot-cli` | GitHub Copilot CLI — plan, implement, test, and review from the terminal |
