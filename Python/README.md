@@ -29,6 +29,7 @@ Copilot capability during a live session.
 | [14](#demo-14) | `14-issue-to-pr` | Core Developer Workflows | **Issue to Pull Request** — fix a bug end-to-end (issue → fix → PR → merge) | 12 min |
 | [15](#demo-15) | `15-github-agent-task` | Core Developer Workflows | **Agent task on GitHub.com** — delegate work to the coding agent from the browser | 10 min |
 | [16](#demo-16) | `16-multi-agent-pr-review` | Customizing Copilot | **Multi-Agent PR Quality Gate** — a coordinator agent delegates to specialist sub-agents to review a Pull Request | 12 min |
+| [17](#demo-17) | `17-github-copilot-cli` | Core Developer Workflows | **GitHub Copilot CLI** — plan, implement, test, and review from the terminal | 10 min |
 
 ---
 
@@ -1063,6 +1064,43 @@ comparing the code against `PR.md`:
 - **Green tests ≠ correct code.** The gate marks AC-04/AC-05 from the *code*, not from the *passing* tests, and flags the coverage gap explicitly.
 - **Evidence over opinion:** every AC status cites a file, line, or command result — the decision is defensible in a PR review.
 - **You stay accountable:** the gate produces a recommendation you paste into the PR — a human still approves and merges (Responsible AI).
+
+[⬆ Back to Demo Map](#demo-map)
+
+---
+
+<a id="demo-17"></a>
+
+## Demo 17 — GitHub Copilot CLI (`17-github-copilot-cli`)
+
+**What it shows:** How to use the GitHub Copilot coding agent directly from a
+terminal: trust a working directory, add files as context with `@`, use plan mode,
+approve tools, edit code, run tests, inspect the diff, and resume a session.
+
+**Scenario:** `TicketQueue` has two intentionally unfinished methods. `TASK.md`
+defines ticket ordering and owner-workload rules, while the pytest suite provides
+a failing baseline and executable acceptance criteria.
+
+**How to demo:**
+
+1. Open a terminal in `17-github-copilot-cli` and run `copilot`.
+2. Use `@TASK.md` and `@issue_desk.py` to ask for an explanation.
+3. Press **Shift+Tab**, ask Copilot to plan the implementation, and review the plan.
+4. Return to normal mode and ask Copilot to implement the plan and run pytest.
+5. Discuss each file/command approval instead of granting broad permissions.
+6. Run `!git diff -- issue_desk.py test_issue_desk.py`, then ask Copilot to review it.
+7. Show `/context`, `/usage`, and `copilot --continue` for session management.
+
+See `17-github-copilot-cli/README.md` for the exact prompts, setup, reset steps,
+and presenter talking points.
+
+**Key talking points:**
+
+- This is the standalone `copilot` coding agent, not the legacy `gh copilot` command.
+- Plan mode lets you inspect the approach before granting permission to edit files.
+- `@path` controls context and `!command` executes a shell command directly.
+- Human approval plus a real test run provides control and validation.
+- Sessions retain useful context and can be resumed without reconstructing the task.
 
 [⬆ Back to Demo Map](#demo-map)
 
