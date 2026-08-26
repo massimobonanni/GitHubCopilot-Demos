@@ -30,6 +30,7 @@ Copilot capability during a live session.
 | [15](#demo-15) | `15-github-agent-task` | Core Developer Workflows | **Agent task on GitHub.com** — delegate work to the coding agent from the browser | 10 min |
 | [16](#demo-16) | `16-multi-agent-pr-review` | Customizing Copilot | **Multi-Agent PR Quality Gate** — a coordinator agent delegates to specialist sub-agents to review a Pull Request | 12 min |
 | [17](#demo-17) | `17-github-copilot-cli` | Core Developer Workflows | **GitHub Copilot CLI** — plan, implement, test, and review from the terminal | 10 min |
+| [18](#demo-18) | `18-github-copilot-app` | Core Developer Workflows | **GitHub Copilot App** — coordinate parallel coding sessions from the desktop | 12 min |
 
 ---
 
@@ -1101,6 +1102,48 @@ and presenter talking points.
 - `@path` controls context and `!command` executes a shell command directly.
 - Human approval plus a real test run provides control and validation.
 - Sessions retain useful context and can be resumed without reconstructing the task.
+
+[⬆ Back to Demo Map](#demo-map)
+
+---
+
+<a id="demo-18"></a>
+
+## Demo 18 — GitHub Copilot App (`18-github-copilot-app`)
+
+**What it shows:** How to use the GitHub Copilot desktop app as a visual control
+center for planning, running, reviewing, and validating multiple Python
+coding-agent sessions.
+
+**Scenario:** A delivery dashboard has two intentionally unfinished services.
+`SprintPlanner` selects ready work within capacity, while `RiskAnalyzer` finds
+overdue and due-soon items. Separate pytest files let the workstreams be
+delegated in parallel and reviewed independently.
+
+**How to demo:**
+
+1. Add the repository to the Copilot app and scope it to `18-github-copilot-app`.
+2. Ask one session to read `TASK.md`, explain both workstreams, and plan validation.
+3. Start separate sessions for `SprintPlanner` and `RiskAnalyzer` with explicit
+   code and test boundaries.
+4. Monitor session status and activity, then review each proposed diff and pytest
+   result before accepting it.
+5. Start an integration session to check the combined changes against `TASK.md`
+   and run the complete pytest suite.
+6. Review the final diff and decide what is ready to commit or open as a pull
+   request.
+
+See `18-github-copilot-app/README.md` for exact prompts, prerequisites, reset
+steps, and presenter talking points.
+
+**Key talking points:**
+
+- The desktop app makes concurrent agent sessions visible and manageable.
+- Clear workstream and test boundaries reduce conflicts during parallel work.
+- Each session keeps its prompt, activity, diff, tests, and summary together.
+- Agent completion is not human approval; review and executable validation still
+  decide whether the work is ready.
+- The app complements IDE and CLI workflows rather than replacing them.
 
 [⬆ Back to Demo Map](#demo-map)
 
