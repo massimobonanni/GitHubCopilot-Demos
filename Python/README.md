@@ -1092,7 +1092,7 @@ a failing baseline and executable acceptance criteria.
 6. Run `!git diff -- issue_desk.py test_issue_desk.py`, then ask Copilot to review it.
 7. Show `/context`, `/usage`, and `copilot --continue` for session management.
 
-See `17-github-copilot-cli/README.md` for the exact prompts, setup, reset steps,
+See [`17-github-copilot-cli/README.md`](17-github-copilot-cli/README.md)  for the exact prompts, setup, reset steps,
 and presenter talking points.
 
 **Key talking points:**
@@ -1133,7 +1133,7 @@ delegated in parallel and reviewed independently.
 6. Review the final diff and decide what is ready to commit or open as a pull
    request.
 
-See `18-github-copilot-app/README.md` for exact prompts, prerequisites, reset
+See [`18-github-copilot-app/README.md`](18-github-copilot-app/README.md)  for exact prompts, prerequisites, reset
 steps, and presenter talking points.
 
 **Key talking points:**
