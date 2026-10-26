@@ -16,7 +16,7 @@ public record Product(
     DateTime? CreatedAt = null
 )
 {
-    public DateTime CreatedAt { get; init; } = CreatedAt ?? DateTime.Now;
+    public DateTime? CreatedAt { get; init; } = CreatedAt ?? DateTime.Now;
 }
 
 public class Inventory
