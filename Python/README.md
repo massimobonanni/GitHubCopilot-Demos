@@ -464,11 +464,11 @@ with its own name, system prompt, and toolset — selectable from the Chat mode 
 | Feature | When active | File location |
 | --- | --- | --- |
 | Instructions | Always — every suggestion | `.github/instructions/*.instructions.md` |
-| **Agent** | **While selected in mode picker** | `.github/*.agent.md` |
+| **Agent** | **While selected in mode picker** | `.github/agents/*.agent.md` |
 
 **Setup (do this before the demo):**
 
-1. Copy `code-reviewer.agent.md` to `.github/code-reviewer.agent.md`
+1. Create `.github/agents/` if it does not exist, then copy `code-reviewer.agent.md` to `.github/agents/code-reviewer.agent.md`
 2. Reload VS Code (Ctrl+Shift+P → *"Developer: Reload Window"*)
 3. Open Copilot Chat → click the mode picker → verify **Code Reviewer** appears
 
@@ -540,7 +540,7 @@ distinct from always-on Instructions and persistent Agent modes.
 | Feature | When active | File location |
 | --- | --- | --- |
 | Instructions | Always — every suggestion | `.github/instructions/*.instructions.md` |
-| Agent | While selected in mode picker | `.github/*.agent.md` |
+| Agent | While selected in mode picker | `.github/agents/*.agent.md` |
 | **Prompt File** | **When explicitly invoked** | `.github/prompts/*.prompt.md` |
 
 **Setup (do this before the demo):**
@@ -605,7 +605,7 @@ reference assets that guide consistent, high-quality output.
 | Feature | When active | File location | Invocation |
 | --- | --- | --- | --- |
 | Instructions | Always — every suggestion | `.github/instructions/*.instructions.md` | Automatic |
-| Agent | While selected in mode picker | `.github/*.agent.md` | Manual (mode picker) |
+| Agent | While selected in mode picker | `.github/agents/*.agent.md` | Manual (mode picker) |
 | Prompt File | When explicitly invoked | `.github/prompts/*.prompt.md` | Manual (`/command`) |
 | **Skill** | **When relevant to the task** | `.github/skills/<name>/SKILL.md` | **Automatic or `/command`** |
 
@@ -963,7 +963,6 @@ each other via the `agent` tool.
 | Number of agents | One | **Three (1 coordinator + 2 specialists)** |
 | Composition | Standalone | **Coordinator delegates via the `agent` tool** |
 | Output | A single review | **A reconciled decision built from two specialist handoffs** |
-| Location | `.github/*.agent.md` | `.github/agents/*.agent.md` |
 
 **The scenario:** the PR adds `PromoService.apply(code, subtotal)`. It runs and the three
 submitted tests pass — but it hides **two defects** the quality gate should catch by
