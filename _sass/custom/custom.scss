@@ -1,0 +1,22 @@
+.copy-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 0.5rem;
+  background-color: $code-background-color;
+
+  .btn {
+    min-height: 2.75rem;
+  }
+}
+
+.copy-status {
+  flex: 1;
+  font-size: 0.875rem;
+}
+
+.example-code-block pre {
+  margin-top: 0;
+}

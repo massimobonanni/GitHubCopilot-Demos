@@ -1,11 +1,24 @@
 title: GitHub Copilot Demos
+url: https://massimobonanni.github.io
+baseurl: /GitHubCopilot-Demos
+repository: massimobonanni/GitHubCopilot-Demos
 description: >-
   Hands-on demo examples for GitHub Copilot courses — code completions, chat &
   refactoring, test generation, documentation, prompt engineering, bug
   detection, plan mode, and Copilot customization — across C#, Java, JavaScript,
   and Python.
-theme: jekyll-theme-architect
-show_downloads: false
+remote_theme: just-the-docs/just-the-docs@v0.12.0
+search_enabled: true
+heading_anchors: true
+back_to_top: true
+back_to_top_text: "Back to top"
+
+# Use our copy controls for exact whitespace and accessible success/error feedback.
+enable_copy_code_button: false
+
+aux_links:
+  "View on GitHub":
+    - "https://github.com/massimobonanni/GitHubCopilot-Demos"
 
 # GitHub Pages default plugins. Together these let the existing README.md files
 # render with the theme without adding YAML front matter to them:
@@ -15,6 +28,8 @@ show_downloads: false
 #   - relative-links: rewrite relative links to .md files into their .html URLs.
 #   - readme-index: serve each directory's README.md as that directory's index.
 plugins:
+  - jekyll-remote-theme
+  - jekyll-include-cache
   - jekyll-optional-front-matter
   - jekyll-default-layout
   - jekyll-titles-from-headings
@@ -29,6 +44,43 @@ defaults:
     values:
       layout: default
       render_with_liquid: false
+      nav_exclude: true
+  # Theme assets contain Liquid and must not inherit the demo content setting.
+  - scope:
+      path: "assets"
+    values:
+      layout: null
+      render_with_liquid: true
+  - scope:
+      path: "README.md"
+    values:
+      title: Home
+      nav_order: 1
+      nav_exclude: false
+  - scope:
+      path: "CSharp/README.md"
+    values:
+      title: "C#"
+      nav_order: 2
+      nav_exclude: false
+  - scope:
+      path: "Java/README.md"
+    values:
+      title: Java
+      nav_order: 3
+      nav_exclude: false
+  - scope:
+      path: "Javascript/README.md"
+    values:
+      title: JavaScript
+      nav_order: 4
+      nav_exclude: false
+  - scope:
+      path: "Python/README.md"
+    values:
+      title: Python
+      nav_order: 5
+      nav_exclude: false
 
 # Keep build artifacts and tooling out of the published site.
 exclude:

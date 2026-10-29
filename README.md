@@ -47,3 +47,21 @@ Each sub-folder contains the following demos:
 | 16 | `16-multi-agent-pr-review` | Multi-Agent PR Quality Gate — a coordinator agent delegates to specialist sub-agents to review a Pull Request |
 | 17 | `17-github-copilot-cli` | GitHub Copilot CLI — plan, implement, test, and review from the terminal |
 | 18 | `18-github-copilot-app` | GitHub Copilot App — coordinate parallel coding sessions from the desktop |
+
+## Documentation website
+
+GitHub Pages renders these README files with the **Just the Docs** theme, pinned
+in `_config.yml`. The website includes language navigation, full-text search, and
+a **Copia** button on every code or plain-text example block. Copying preserves
+the block's whitespace and line breaks and reports success or failure; clipboard
+access requires HTTPS (or localhost) and browser permission.
+
+To preview the site locally with the same dependencies as GitHub Pages:
+
+```bash
+bundle install
+bundle exec jekyll serve --baseurl /GitHubCopilot-Demos
+```
+
+Open `http://localhost:4000/GitHubCopilot-Demos/`. The deployment workflow remains
+in `.github/workflows/pages.yml`; no separate documentation copies are needed.
