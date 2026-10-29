@@ -25,9 +25,11 @@
 
     let timeout;
     button.addEventListener("click", async () => {
+      if (button.getAttribute("aria-disabled") === "true") return;
+
       window.clearTimeout(timeout);
       status.textContent = "";
-      button.disabled = true;
+      button.setAttribute("aria-disabled", "true");
 
       try {
         await navigator.clipboard.writeText(code.textContent);
@@ -35,7 +37,7 @@
       } catch {
         status.textContent = "Copia non riuscita. Seleziona e copia il testo manualmente.";
       } finally {
-        button.disabled = false;
+        button.removeAttribute("aria-disabled");
         timeout = window.setTimeout(() => {
           status.textContent = "";
         }, 5000);
